@@ -2,6 +2,8 @@
 
 Cloudflare worker function to update github bio automatically with leetcode and codeforces profile stats 🚀
 
+You can see it in action [here](https://github.com/sudo-vaibhav)
+
 ## How it works
 
 I run a CRON Job ⌚ every 30 minutes and update my github bio with my current codeforces rating and leetcode stats.

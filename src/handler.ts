@@ -3,7 +3,7 @@ import { Octokit } from '@octokit/core'
 const octokit = new Octokit({
   auth: config.githubToken,
 })
-export async function handleScheduled() {
+export async function changeDescription() {
   const resp: {
     result: { newRating: number }[]
   } = await fetch(
@@ -57,4 +57,5 @@ export async function handleScheduled() {
   await octokit.request('PATCH /user', {
     bio: newDescription,
   })
+  return newDescription
 }
