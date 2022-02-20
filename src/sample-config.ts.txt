@@ -1,7 +1,7 @@
 export default {
   githubToken: 'token_here',
   codeforcesHandle: 'creamyCockroach',
-  leetcodeHandle: 'mailvaibhavchopra',
+  leetcodeHandle: 'vaibhavchopra',
   descriptionPrefix:
     // without any beginning or ending commas
     'Sample description prefix',
