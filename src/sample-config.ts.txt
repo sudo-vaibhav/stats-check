@@ -4,5 +4,5 @@ export default {
   leetcodeHandle: 'vaibhavchopra',
   descriptionPrefix:
     // without any beginning or ending commas
-    'Sample description prefix',
+    'Incoming Summer Intern @fidelity, Celo India Fellow',
 }

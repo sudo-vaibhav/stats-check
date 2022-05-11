@@ -1,5 +1,6 @@
 import config from './config'
 import { Octokit } from '@octokit/core'
+import getRatingName from './utils/getRatingName'
 const octokit = new Octokit({
   auth: config.githubToken,
 })
@@ -9,8 +10,11 @@ export async function changeDescription() {
   } = await fetch(
     `https://codeforces.com/api/user.rating?handle=${config.codeforcesHandle}`,
   ).then((r) => r.json())
-  const latestRating = resp.result[resp.result.length - 1].newRating
-
+  let maxRating = 0
+  resp.result.forEach((r) => {
+    maxRating = Math.max(r.newRating, maxRating)
+  })
+  const ratingName = getRatingName(maxRating)
   const leetcodeResponse: {
     data: {
       matchedUser: {
@@ -53,7 +57,7 @@ export async function changeDescription() {
   const leetCodeStars = leetcodeResponse.data.matchedUser.profile.starRating
   const leetCodeProblemsSolved =
     leetcodeResponse.data.matchedUser.submitStats.acSubmissionNum[0].count
-  const newDescription = `${config.descriptionPrefix}, Rated ${latestRating} on Codeforces, ${leetCodeStars}⭐ on Leetcode (${leetCodeProblemsSolved})`
+  const newDescription = `${config.descriptionPrefix}, Rated ${ratingName}(${maxRating}) (max) on Codeforces, ${leetCodeStars}⭐ on Leetcode (${leetCodeProblemsSolved})`
   await octokit.request('PATCH /user', {
     bio: newDescription,
   })
